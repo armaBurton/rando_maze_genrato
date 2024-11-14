@@ -14,7 +14,9 @@ import React, {
 import sample from "lodash/sample";
 
 const CellGrid = forwardRef(({ size }, ref) => {
-  const dim = 800 / size;
+  // console.log("math ", 800 / size);
+  const dim = 600 / size;
+  // console.log("dim ", dim)
   const cells = [];
   const divRef = useRef({});
   const [lastGrid, setLastGrid] = useState(null);
@@ -80,7 +82,7 @@ const CellGrid = forwardRef(({ size }, ref) => {
             backgroundColor: "yellow",
             width: dim,
             height: dim,
-            fontSize: 10,
+            fontSize: "9px",
           }}
         >
           {`${i}-${j}`}
@@ -104,7 +106,7 @@ const CellGrid = forwardRef(({ size }, ref) => {
     let currentCell = borders["0-0"];
     //missing stuff here
 
-    const newCell = borders.slice();
+    // const newCell = borders.slice();
     // newGrid["0-0"].visted = true;
     // setBorders(newGrid);
     // currentCell.visited = true;
@@ -117,8 +119,8 @@ const CellGrid = forwardRef(({ size }, ref) => {
       let current = stack.pop();
 
       let nbs = getNeighbors(current.x, current.y);
-      console.log(nbs);
-      console.log("x, y ", current.x, current.y);
+      // console.log(nbs);
+      // console.log("x, y ", current.x, current.y);
 
       if (nbs && nbs.length > 0) {
         stack.push(current);
