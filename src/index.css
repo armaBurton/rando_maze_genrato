@@ -1,0 +1,21 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Jaldi:wght@400;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic&family=Funnel+Display:wght@300..800&family=Jaldi:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Funnel Display", sans-serif;
+  overflow: hidden;
+
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #9c7a68;
+}
+
+
+  
