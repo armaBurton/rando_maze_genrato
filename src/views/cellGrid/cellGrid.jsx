@@ -3,7 +3,7 @@ import {
   randoNumbo,
   capitalize,
   timeout,
-} from "./helper/helper";
+} from "../../utils/utils";
 import React, {
   useState,
   useImperativeHandle,
@@ -12,13 +12,13 @@ import React, {
   useEffect,
 } from "react";
 import sample from "lodash/sample";
+import ReturnCell from "./ReturnCell";
 
 const CellGrid = forwardRef(({ size }, ref) => {
-  // console.log("math ", 800 / size);
   const dim = 600 / size;
-  // console.log("dim ", dim)
-  const cells = [];
+  // const cells = [];
   const divRef = useRef({});
+  const [cells, setCells] = useState([]);
   const [lastGrid, setLastGrid] = useState(null);
   const [running, setRunning] = useState(false);
   const [xVal, setXVal] = useState(0);
@@ -62,32 +62,105 @@ const CellGrid = forwardRef(({ size }, ref) => {
     },
   }));
 
+  // const pushToCellsState = (borders) => {
+  //   const { x, y, top, bottom, left, right, visited } = borders;
+
+  // const fragment = [
+  //   <div
+  //     key={`${i}-${j}`}
+  //     className="mazeUnit"
+  //     ref={(el) => (divRef.current[`${i}-${j}`] = el)}
+  //     style={{
+  //       borderTop: borders[`${i}-${j}`]?.top ? "1px solid black" : "none",
+  //       borderBottom: borders[`${i}-${j}`]?.bottom
+  //         ? "1px solid black"
+  //         : "none",
+  //       borderRight: borders[`${i}-${j}`]?.right
+  //         ? "1px solid black"
+  //         : "none",
+  //       borderLeft: borders[`${i}-${j}`]?.left ? "1px solid black" : "none",
+  //       backgroundColor: "yellow",
+  //       width: dim,
+  //       height: dim,
+  //       fontSize: "9px",
+  //     }}
+  //   >
+  //     {`${i}-${j}`}
+  //   </div>]
+  // setCells[...]
+  // }
+
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
+      // pushToCellsState(borders[`${i}-${j}`]);
       const { x, y, top, bottom, left, right, visited } = borders[`${i}-${j}`];
-      cells.push(
-        <div
-          key={`${i}-${j}`}
-          className="mazeUnit"
-          ref={(el) => (divRef.current[`${i}-${j}`] = el)}
-          style={{
-            borderTop: borders[`${i}-${j}`]?.top ? "1px solid black" : "none",
-            borderBottom: borders[`${i}-${j}`]?.bottom
-              ? "1px solid black"
-              : "none",
-            borderRight: borders[`${i}-${j}`]?.right
-              ? "1px solid black"
-              : "none",
-            borderLeft: borders[`${i}-${j}`]?.left ? "1px solid black" : "none",
-            backgroundColor: "yellow",
-            width: dim,
-            height: dim,
-            fontSize: "9px",
-          }}
-        >
-          {`${i}-${j}`}
-        </div>,
-      );
+      const cellBLock = <ReturnCell
+        x={x}
+        y={y}
+        top={top}
+        bottom={bottom}
+        left={left}
+        right={right}
+        visited={visited}
+        ref={(el) => (divRef.current[`${x}-${y}`] = el)}
+      />
+      // const cellBLock = ReturnCell(i, j, borders[`${i}-${j}`], divRef, dim);
+      setCells([...cells, cellBLock]);
+      //         < div
+      //       x = { borders[`${i}-${j}`].x }
+      //       y = { borders[`${i}-${j}`].y }
+      //       top = { borders[`${i}-${j}`].top }
+      //       bottom = { borders[`${i}-${j}`].bottom }
+      //       left = { borders[`${i}-${j}`].left }
+      //       right = { borders[`${i}-${j}`].right }
+      //       visited = { borders[`${i}-${j}`].visited }
+      //       key = {`${i}-${j}`
+      //     }
+      //     className = "mazeUnit"
+      //     ref = {(el) => (divRef.current[`${i}-${j}`] = el)}
+      // style = {{
+      //   borderTop: borders[`${i}-${j}`]?.top ? "1px solid black" : "none",
+      //     borderBottom: borders[`${i}-${j}`]?.bottom
+      //       ? "1px solid black"
+      //       : "none",
+      //       borderRight: borders[`${i}-${j}`]?.right
+      //         ? "1px solid black"
+      //         : "none",
+      //         borderLeft: borders[`${i}-${j}`]?.left ? "1px solid black" : "none",
+      //           backgroundColor: "yellow",
+      //             width: dim,
+      //               height: dim,
+      //                 fontSize: "9px",
+      //         }}
+      //       >
+      //   {`${i}-${j}`}
+      //       </div >
+
+
+
+      // cells.push(
+      // <div
+      //   key={`${i}-${j}`}
+      //   className="mazeUnit"
+      //   ref={(el) => (divRef.current[`${i}-${j}`] = el)}
+      //   style={{
+      //     borderTop: borders[`${i}-${j}`]?.top ? "1px solid black" : "none",
+      //     borderBottom: borders[`${i}-${j}`]?.bottom
+      //       ? "1px solid black"
+      //       : "none",
+      //     borderRight: borders[`${i}-${j}`]?.right
+      //       ? "1px solid black"
+      //       : "none",
+      //     borderLeft: borders[`${i}-${j}`]?.left ? "1px solid black" : "none",
+      //     backgroundColor: "yellow",
+      //     width: dim,
+      //     height: dim,
+      //     fontSize: "9px",
+      //   }}
+      // >
+      //   {`${i}-${j}`}
+      // </div>,
+      // );
     }
   }
 
@@ -192,17 +265,19 @@ const CellGrid = forwardRef(({ size }, ref) => {
           {cells}
         </div>
       </div>
-      <button className="mazeButton" onClick={() => generateMaze()}>
-        Generate Maze
-      </button>
-      <button
-        className="mazeButton"
-        onClick={() =>
-          changeBgColor(divRef, lastGrid, setLastGrid, size, setXVal, setYVal)
-        }
-      >
-        Click
-      </button>
+      <div className="buttonContainer">
+        <button className="mazeButton" onClick={() => generateMaze()}>
+          Generate Maze
+        </button>
+        <button
+          className="mazeButton"
+          onClick={() =>
+            changeBgColor(divRef, lastGrid, setLastGrid, size, setXVal, setYVal)
+          }
+        >
+          Click
+        </button>
+      </div>
       <p className="coords">
         {xVal >= 0 ? `${xVal}` : ``}-{yVal >= 0 ? `${yVal}` : ``}
       </p>

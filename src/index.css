@@ -7,7 +7,7 @@
   margin: 0;
   padding: 0;
   font-family: "Funnel Display", sans-serif;
-  overflow: hidden;
+  /* overflow: hidden; */
 
 }
 
@@ -16,6 +16,3 @@ body {
   min-height: 100vh;
   background-color: #9c7a68;
 }
-
-
-  
