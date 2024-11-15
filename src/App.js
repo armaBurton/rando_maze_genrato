@@ -1,9 +1,9 @@
 //github.com/Xinecraft/react-maze-generator
 import React from "react";
 import "./App.css";
-// import Maze from './views/maze/maze';
-import TitleBlock from "./views/titleBlock/titleBlock";
-import CellGrid from "./views/CellGrid/CellGrid";
+import TitleBlock from "./views/TitleBlock/TitleBlock";
+// import CellGrid from "./views/CellGrid";
+import Labyrinth from "./Labyrinth/Labyrinth";
 
 function App() {
   return (
@@ -12,9 +12,7 @@ function App() {
         <TitleBlock />
       </header>
       <section className="mazeSection">
-        <CellGrid size={20} />
-
-        {/* <Maze />   */}
+        <Labyrinth size={20} />
       </section>
     </main>
   );

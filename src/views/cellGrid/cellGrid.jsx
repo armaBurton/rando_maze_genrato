@@ -14,11 +14,11 @@ import React, {
 import sample from "lodash/sample";
 import ReturnCell from "./ReturnCell";
 
-const CellGrid = forwardRef(({ size }, ref) => {
+const CellGrid = forwardRef((size) => {
   const dim = 600 / size;
-  // const cells = [];
+  const cells = [];
   const divRef = useRef({});
-  const [cells, setCells] = useState([]);
+  //   const [cells, setCells] = useState([]);
   const [lastGrid, setLastGrid] = useState(null);
   const [running, setRunning] = useState(false);
   const [xVal, setXVal] = useState(0);
@@ -94,73 +94,70 @@ const CellGrid = forwardRef(({ size }, ref) => {
     for (let j = 0; j < size; j++) {
       // pushToCellsState(borders[`${i}-${j}`]);
       const { x, y, top, bottom, left, right, visited } = borders[`${i}-${j}`];
-      const cellBLock = <ReturnCell
-        x={x}
-        y={y}
-        top={top}
-        bottom={bottom}
-        left={left}
-        right={right}
-        visited={visited}
-        ref={(el) => (divRef.current[`${x}-${y}`] = el)}
-      />
-      // const cellBLock = ReturnCell(i, j, borders[`${i}-${j}`], divRef, dim);
+      //   const cellBLock = (
+      //     <ReturnCell
+      //       x={x}
+      //       y={y}
+      //       top={top}
+      //       bottom={bottom}
+      //       left={left}
+      //       right={right}
+      //       visited={visited}
+      //       ref={(el) => (divRef.current[`${x}-${y}`] = el)}
+      //     />
+      //   );
+      const cellBLock = ReturnCell(i, j, borders[`${i}-${j}`], divRef, dim);
       setCells([...cells, cellBLock]);
-      //         < div
-      //       x = { borders[`${i}-${j}`].x }
-      //       y = { borders[`${i}-${j}`].y }
-      //       top = { borders[`${i}-${j}`].top }
-      //       bottom = { borders[`${i}-${j}`].bottom }
-      //       left = { borders[`${i}-${j}`].left }
-      //       right = { borders[`${i}-${j}`].right }
-      //       visited = { borders[`${i}-${j}`].visited }
-      //       key = {`${i}-${j}`
-      //     }
-      //     className = "mazeUnit"
-      //     ref = {(el) => (divRef.current[`${i}-${j}`] = el)}
-      // style = {{
-      //   borderTop: borders[`${i}-${j}`]?.top ? "1px solid black" : "none",
-      //     borderBottom: borders[`${i}-${j}`]?.bottom
-      //       ? "1px solid black"
-      //       : "none",
-      //       borderRight: borders[`${i}-${j}`]?.right
-      //         ? "1px solid black"
-      //         : "none",
-      //         borderLeft: borders[`${i}-${j}`]?.left ? "1px solid black" : "none",
-      //           backgroundColor: "yellow",
-      //             width: dim,
-      //               height: dim,
-      //                 fontSize: "9px",
-      //         }}
-      //       >
-      //   {`${i}-${j}`}
-      //       </div >
+      <div
+        x={borders[`${i}-${j}`].x}
+        y={borders[`${i}-${j}`].y}
+        top={borders[`${i}-${j}`].top}
+        bottom={borders[`${i}-${j}`].bottom}
+        left={borders[`${i}-${j}`].left}
+        right={borders[`${i}-${j}`].right}
+        visited={borders[`${i}-${j}`].visited}
+        key={`${i}-${j}`}
+        className="mazeUnit"
+        ref={(el) => (divRef.current[`${i}-${j}`] = el)}
+        style={{
+          borderTop: borders[`${i}-${j}`]?.top ? "1px solid black" : "none",
+          borderBottom: borders[`${i}-${j}`]?.bottom
+            ? "1px solid black"
+            : "none",
+          borderRight: borders[`${i}-${j}`]?.right ? "1px solid black" : "none",
+          borderLeft: borders[`${i}-${j}`]?.left ? "1px solid black" : "none",
+          backgroundColor: "yellow",
+          width: dim,
+          height: dim,
+          fontSize: "9px",
+        }}
+      >
+        {`${i}-${j}`}
+      </div>;
 
-
-
-      // cells.push(
-      // <div
-      //   key={`${i}-${j}`}
-      //   className="mazeUnit"
-      //   ref={(el) => (divRef.current[`${i}-${j}`] = el)}
-      //   style={{
-      //     borderTop: borders[`${i}-${j}`]?.top ? "1px solid black" : "none",
-      //     borderBottom: borders[`${i}-${j}`]?.bottom
-      //       ? "1px solid black"
-      //       : "none",
-      //     borderRight: borders[`${i}-${j}`]?.right
-      //       ? "1px solid black"
-      //       : "none",
-      //     borderLeft: borders[`${i}-${j}`]?.left ? "1px solid black" : "none",
-      //     backgroundColor: "yellow",
-      //     width: dim,
-      //     height: dim,
-      //     fontSize: "9px",
-      //   }}
-      // >
-      //   {`${i}-${j}`}
-      // </div>,
-      // );
+      cells.push(
+        <div
+          key={`${i}-${j}`}
+          className="mazeUnit"
+          ref={(el) => (divRef.current[`${i}-${j}`] = el)}
+          style={{
+            borderTop: borders[`${i}-${j}`]?.top ? "1px solid black" : "none",
+            borderBottom: borders[`${i}-${j}`]?.bottom
+              ? "1px solid black"
+              : "none",
+            borderRight: borders[`${i}-${j}`]?.right
+              ? "1px solid black"
+              : "none",
+            borderLeft: borders[`${i}-${j}`]?.left ? "1px solid black" : "none",
+            backgroundColor: "yellow",
+            width: dim,
+            height: dim,
+            fontSize: "9px",
+          }}
+        >
+          {`${i}-${j}`}
+        </div>,
+      );
     }
   }
 
