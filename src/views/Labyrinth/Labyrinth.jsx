@@ -8,14 +8,39 @@ import React, {
 import sample from "lodash/sample";
 import InnerArr from "./InnerArray/InnerArrys";
 import ResetLabyrinth from "./ResetLabyrinth/ResetLabyrinth";
+const Labyrinth = forwardRef(({ sizeX, sizeY, ...props }, ref) => {
 
-const Labyrinth = (size) => {
-  const dim = 600 / size;
-  const pixelRef = useRef();
+  console.log("Labyrinth")
+  const geometry = {
+    x: sizeX,
+    y: sizeY,
+    length: 600,
+  };
+  const pixelRef = useRef({});
   const [running, setRunning] = useState(false);
   const [xVal, setXVal] = useState(0);
   const [yVal, setYVal] = useState(0);
-  const [pixels, setPixels] = useState();
+  const [pixels, setPixels] = useState({});
+  const labyrinthRow = [];
+
+
+  useEffect(() => {
+    ResetLabyrinth(pixelRef, sizeX, sizeY, setPixels);
+    //   READING PIXELS!!!!!
+    // console.log(JSON.stringify(pixels))
+    // const pixel = pixels["0x0"];
+    // console.log(pixel);
+  }, [])
+
+
+
+  useImperativeHandle(ref, () => ({
+    // toggleCellBorder: (row, col, border) => {
+    //   const index = { row, col };
+    //   toggleBorder(index, border);
+    // },
+  }));
+
 
   const generateMaze = () => {
     if (running) return;
@@ -53,6 +78,6 @@ const Labyrinth = (size) => {
       </p>
     </>
   );
-};
+});
 
 export default Labyrinth;

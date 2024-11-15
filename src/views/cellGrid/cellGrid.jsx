@@ -12,13 +12,13 @@ import React, {
   useEffect,
 } from "react";
 import sample from "lodash/sample";
-import ReturnCell from "./ReturnCell";
+import ReturnCell from "./ReturnCell/ReturnCell";
 
-const CellGrid = forwardRef((size) => {
+const CellGrid = forwardRef((size, ref) => {
   const dim = 600 / size;
-  const cells = [];
+  // const cells = [];
   const divRef = useRef({});
-  //   const [cells, setCells] = useState([]);
+  const [cells, setCells] = useState([]);
   const [lastGrid, setLastGrid] = useState(null);
   const [running, setRunning] = useState(false);
   const [xVal, setXVal] = useState(0);
