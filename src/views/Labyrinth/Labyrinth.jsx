@@ -6,9 +6,22 @@ import React, {
   useImperativeHandle,
 } from "react";
 import sample from "lodash/sample";
+import InnerArr from "./InnerArray/InnerArrys";
+import ResetLabyrinth from "./ResetLabyrinth/ResetLabyrinth";
 
 const Labyrinth = (size) => {
-  const [grid, setGrid] = useState([]);
+  const dim = 600 / size;
+  const pixelRef = useRef();
+  const [running, setRunning] = useState(false);
+  const [xVal, setXVal] = useState(0);
+  const [yVal, setYVal] = useState(0);
+  const [pixels, setPixels] = useState();
+
+  const generateMaze = () => {
+    if (running) return;
+
+    // setPixels(ResetLabyrinth(pixelRef, size));
+  };
 
   return (
     <>

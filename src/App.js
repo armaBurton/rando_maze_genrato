@@ -3,7 +3,7 @@ import React from "react";
 import "./App.css";
 import TitleBlock from "./views/TitleBlock/TitleBlock";
 // import CellGrid from "./views/CellGrid";
-import Labyrinth from "./Labyrinth/Labyrinth";
+import Labyrinth from "./views/Labyrinth/Labyrinth";
 
 function App() {
   return (
