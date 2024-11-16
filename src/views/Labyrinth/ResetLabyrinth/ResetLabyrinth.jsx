@@ -1,16 +1,17 @@
-const ResetLabyrinth = (pixelRef, row, col, setPixels) => {
+const ResetLabyrinth = (pixelRef, row, col, setPixels, pixels) => {
   const walls = { top: true, right: true, bottom: true, left: true };
+  const initPixels = {}
   for (let i = 0; i < row; i++) {
     for (let j = 0; j < col; j++) {
-      pixelRef.current[`${i}x${j}`] = {
+      initPixels[`${i}x${j}`] = {
         visited: false,
         walls: walls,
         x: i,
         y: j,
       };
     }
+    setPixels({ ...pixels, initPixels });
   }
-  setPixels({ ...pixelRef.current });
 };
 
 export default ResetLabyrinth;

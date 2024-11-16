@@ -135,29 +135,29 @@ const CellGrid = forwardRef((size, ref) => {
         {`${i}-${j}`}
       </div>;
 
-      cells.push(
-        <div
-          key={`${i}-${j}`}
-          className="mazeUnit"
-          ref={(el) => (divRef.current[`${i}-${j}`] = el)}
-          style={{
-            borderTop: borders[`${i}-${j}`]?.top ? "1px solid black" : "none",
-            borderBottom: borders[`${i}-${j}`]?.bottom
-              ? "1px solid black"
-              : "none",
-            borderRight: borders[`${i}-${j}`]?.right
-              ? "1px solid black"
-              : "none",
-            borderLeft: borders[`${i}-${j}`]?.left ? "1px solid black" : "none",
-            backgroundColor: "yellow",
-            width: dim,
-            height: dim,
-            fontSize: "9px",
-          }}
-        >
-          {`${i}-${j}`}
-        </div>,
-      );
+      // cells.push(
+      //   <div
+      //     key={`${i}-${j}`}
+      //     className="mazeUnit"
+      //     ref={(el) => (divRef.current[`${i}-${j}`] = el)}
+      //     style={{
+      //       borderTop: borders[`${i}-${j}`]?.top ? "1px solid black" : "none",
+      //       borderBottom: borders[`${i}-${j}`]?.bottom
+      //         ? "1px solid black"
+      //         : "none",
+      //       borderRight: borders[`${i}-${j}`]?.right
+      //         ? "1px solid black"
+      //         : "none",
+      //       borderLeft: borders[`${i}-${j}`]?.left ? "1px solid black" : "none",
+      //       backgroundColor: "yellow",
+      //       width: dim,
+      //       height: dim,
+      //       fontSize: "9px",
+      //     }}
+      //   >
+      //     {`${i}-${j}`}
+      //   </div>,
+      // );
     }
   }
 

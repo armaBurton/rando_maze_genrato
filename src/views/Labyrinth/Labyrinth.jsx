@@ -8,6 +8,8 @@ import React, {
 import sample from "lodash/sample";
 import InnerArr from "./InnerArray/InnerArrys";
 import ResetLabyrinth from "./ResetLabyrinth/ResetLabyrinth";
+// import MakePixelDivs from "./MakePixelDivs/MakePixelDivs";
+
 const Labyrinth = forwardRef(({ sizeX, sizeY, ...props }, ref) => {
 
   console.log("Labyrinth")
@@ -16,23 +18,47 @@ const Labyrinth = forwardRef(({ sizeX, sizeY, ...props }, ref) => {
     y: sizeY,
     length: 600,
   };
+  const labyrinthRow = [];
   const pixelRef = useRef({});
   const [running, setRunning] = useState(false);
   const [xVal, setXVal] = useState(0);
   const [yVal, setYVal] = useState(0);
-  const [pixels, setPixels] = useState({});
-  const labyrinthRow = [];
+  const [pixelDiv, setPixelDiv] = useState();
+  const [pixels, setPixels] = useState(() => {
+    const initPixels = {}
+    for (let x = 0; x < sizeX; x++) {
+      for (let y = 0; y < sizeY; y++) {
+        initPixels[`${x}-${y}`] = {
+          x: x,
+          y: y,
+          top: true,
+          bottom: true,
+          right: true,
+          left: true,
+          visited: false,
+        };
+      }
+    }
+    return initPixels;
+  });
 
+  const showPixels = () => {
+    for (let x = 0; x < sizeX; x++) {
+      for (let y = 0; y < sizeY; y++) {
+        console.log(pixels[`${x}-${y}`].visited)
+      }
+    }
+  }
+
+  showPixels();
 
   useEffect(() => {
-    ResetLabyrinth(pixelRef, sizeX, sizeY, setPixels);
+    // ResetLabyrinth(pixelRef, sizeX, sizeY, setPixels, pixels);
     //   READING PIXELS!!!!!
     // console.log(JSON.stringify(pixels))
     // const pixel = pixels["0x0"];
     // console.log(pixel);
   }, [])
-
-
 
   useImperativeHandle(ref, () => ({
     // toggleCellBorder: (row, col, border) => {
@@ -51,14 +77,14 @@ const Labyrinth = forwardRef(({ sizeX, sizeY, ...props }, ref) => {
   return (
     <>
       <div className="mazeContainer">
-        {/* <div
+        <div
           style={{
             display: "grid",
-            gridTemplateColumns: `repeat(${size}, ${dim}px)`,
+            gridTemplateColumns: `repeat(${geometry.x}, ${geometry.length / geometry.x}px)`,
           }}
         >
-          {cells}
-        </div> */}
+          {/* {pixels ? MakePixelDivs(pixels, setPixelDiv, geometry, pixelRef) : () => { }} */}
+        </div>
       </div>
       <div className="buttonContainer">
         {/* <button className="mazeButton" onClick={() => generateMaze()}>
