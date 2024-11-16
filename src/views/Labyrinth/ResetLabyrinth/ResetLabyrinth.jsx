@@ -1,17 +1,23 @@
-const ResetLabyrinth = (pixelRef, row, col, setPixels, pixels) => {
-  const walls = { top: true, right: true, bottom: true, left: true };
+const ResetLabyrinth = (geometry) => {
   const initPixels = {}
-  for (let i = 0; i < row; i++) {
-    for (let j = 0; j < col; j++) {
-      initPixels[`${i}x${j}`] = {
+  for (let x = 0; x < geometry.sizeX; x++) {
+    for (let y = 0; y < geometry.sizeY; y++) {
+      initPixels[`${x}-${y}`] = {
+        x: x,
+        sizeX: geometry.sizeX,
+        y: y,
+        sizeY: geometry.sizeY,
+        length: geometry.length,
+        top: true,
+        bottom: true,
+        right: true,
+        left: true,
         visited: false,
-        walls: walls,
-        x: i,
-        y: j,
       };
     }
-    setPixels({ ...pixels, initPixels });
   }
-};
+  return initPixels;
+}
 
-export default ResetLabyrinth;
+
+export default ResetLabyrinth

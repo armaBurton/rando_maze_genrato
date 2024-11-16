@@ -8,14 +8,14 @@ import React, {
 import sample from "lodash/sample";
 import InnerArr from "./InnerArray/InnerArrys";
 import ResetLabyrinth from "./ResetLabyrinth/ResetLabyrinth";
-// import MakePixelDivs from "./MakePixelDivs/MakePixelDivs";
+import MakePixelDivs from "./MakePixelDivs/MakePixelDivs";
 
 const Labyrinth = forwardRef(({ sizeX, sizeY, ...props }, ref) => {
 
   console.log("Labyrinth")
   const geometry = {
-    x: sizeX,
-    y: sizeY,
+    sizeX: sizeX,
+    sizeY: sizeY,
     length: 600,
   };
   const labyrinthRow = [];
@@ -24,28 +24,17 @@ const Labyrinth = forwardRef(({ sizeX, sizeY, ...props }, ref) => {
   const [xVal, setXVal] = useState(0);
   const [yVal, setYVal] = useState(0);
   const [pixelDiv, setPixelDiv] = useState();
-  const [pixels, setPixels] = useState(() => {
-    const initPixels = {}
-    for (let x = 0; x < sizeX; x++) {
-      for (let y = 0; y < sizeY; y++) {
-        initPixels[`${x}-${y}`] = {
-          x: x,
-          y: y,
-          top: true,
-          bottom: true,
-          right: true,
-          left: true,
-          visited: false,
-        };
-      }
-    }
-    return initPixels;
-  });
+  const [pixels, setPixels] = useState(ResetLabyrinth(geometry))
 
+  const pixelComponents = [];
   const showPixels = () => {
     for (let x = 0; x < sizeX; x++) {
       for (let y = 0; y < sizeY; y++) {
-        console.log(pixels[`${x}-${y}`].visited)
+        //keep these, they work
+        // console.log(pixels[`${x}-${y}`].x)
+        // console.log(pixels[`${x}-${y}`].y)
+        // console.log(pixels[`${x}-${y}`].visited)
+        pixelComponents.push
       }
     }
   }
@@ -71,8 +60,12 @@ const Labyrinth = forwardRef(({ sizeX, sizeY, ...props }, ref) => {
   const generateMaze = () => {
     if (running) return;
 
+    // MakePixelDivs();
+
+
     // setPixels(ResetLabyrinth(pixelRef, size));
   };
+
 
   return (
     <>
@@ -83,6 +76,11 @@ const Labyrinth = forwardRef(({ sizeX, sizeY, ...props }, ref) => {
             gridTemplateColumns: `repeat(${geometry.x}, ${geometry.length / geometry.x}px)`,
           }}
         >
+          {/* <MakePixelDivs pixels={pixels}
+            pixelRef={pixelRef}
+            sizeX={geometry.sizeX}
+            sizeY={geometry.sizeY}
+            length={geometry.length} /> */}
           {/* {pixels ? MakePixelDivs(pixels, setPixelDiv, geometry, pixelRef) : () => { }} */}
         </div>
       </div>
