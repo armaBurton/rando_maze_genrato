@@ -5,11 +5,11 @@ const InnerArr = (setPixels, size, pixelRef) => {
       Array.from({ length: size }, (_, y) => ({
         x: x,
         y: y,
-        top: true,
-        bottom: true,
-        right: true,
-        left: true,
-        visited: false,
+        top: "true",
+        bottom: "true",
+        right: "true",
+        left: "true",
+        visited: "false",
         ref: (el) => {
           if (!pixelRef.current[x]) {
             pixelRef.current[x] = [];

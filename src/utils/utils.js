@@ -14,8 +14,6 @@ export const changeBgColor = (
   const b = randoNumbo(256);
   if (lastGrid) {
     const lastDiv = divRef.current[lastGrid];
-    // console.log(`${lastGrid.x}, ${lastGrid.y}`);
-    // console.log(JSON.stringify(lastDiv))
     lastDiv.style.backgroundColor = "yellow";
   }
   const selectedDiv = divRef.current[`${x}-${y}`];
@@ -38,13 +36,3 @@ export const timeout = (time) => {
 };
 
 export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-
-// const ToggleWalls = (x, y, divRef, walls) => {
-//   const [theseWalls, setTheseWalls] = useState({ ...walls });
-//   //   setBorders({ ...walls });
-//   const selectedDiv = divRef.current[`${x}-${y}`];
-//   selectedDiv.style.borderTop = theseWalls.top;
-//   selectedDiv.style.borderBottom = theseWalls.bottom;
-//   selectedDiv.style.borderLeft = theseWalls.left;
-//   selectedDiv.style.borderRight = theseWalls.right;
-// };

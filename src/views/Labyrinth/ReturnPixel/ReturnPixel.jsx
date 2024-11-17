@@ -1,33 +1,25 @@
 import React, { forwardRef } from "react";
 
 const ReturnPixel = forwardRef((props, ref) => {
-  // console.log(JSON.stringify(props));
+  const bool = String(props.visited);
   return (
     <div
       x={props.x}
       y={props.y}
-      data-visited={JSON.stringify(props.visited)}
-      data-width={JSON.stringify(props.length / props.size)}
-      data-height={JSON.stringify(props.length / props.size)}
-      data-top={JSON.stringify(props.top)}
-      data-bottom={JSON.stringify(props.bottom)}
-      data-left={JSON.stringify(props.left)}
-      data-right={JSON.stringify(props.right)}
+      data-visited={bool}
       ref={ref}
       style={{
-        borderTop: props?.top ? "1px solid black" : "none",
-        borderBottom: props?.bottom ? "1px solid black" : "none",
-        borderRight: props?.right ? "1px solid black" : "none",
-        borderLeft: props?.left ? "1px solid black" : "none",
+        borderTop: "1px solid black",
+        borderBottom: "1px solid black",
+        borderRight: "1px solid black",
+        borderLeft: "1px solid black",
         backgroundColor: "yellow",
         width: props.length / props.size,
         height: props.length / props.size,
         fontSize: "9px",
       }}
       className="pixelComponent"
-    >
-      {`${props.x}-${props.y}`}
-    </div>
+    ></div>
   );
 });
 
@@ -40,5 +32,5 @@ export default ReturnPixel;
 // console.log(pixels[`${x}-${y}`].y);
 // console.log(pixels[`${x}-${y}`].visited);
 // console.log(pixels[`10-10`].visited);
-// pixels[`10-10`].visited = true;
+// pixels[`10-10`].visited = "true";
 // console.log(pixels[`10-10`].visited);

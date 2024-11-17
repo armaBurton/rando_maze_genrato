@@ -11,7 +11,7 @@ function App() {
         <TitleBlock />
       </header>
       <section className="mazeSection">
-        <Labyrinth size={20} />
+        <Labyrinth size={40} />
       </section>
     </main>
   );

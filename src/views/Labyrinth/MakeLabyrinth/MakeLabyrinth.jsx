@@ -7,11 +7,11 @@ const MakeLabyrinth = (geometry) => {
         y: y,
         size: geometry.size,
         length: geometry.length,
-        top: true,
-        bottom: true,
-        right: true,
-        left: true,
-        visited: false,
+        top: "true",
+        bottom: "true",
+        right: "true",
+        left: "true",
+        visited: "false",
         key: `${x}-${y}`,
       };
     }
