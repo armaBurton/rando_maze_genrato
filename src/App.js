@@ -1,6 +1,8 @@
 //github.com/Xinecraft/react-maze-generator
 import React from "react";
+import "./index.css";
 import "./App.css";
+import { size } from "./utils/utils";
 import TitleBlock from "./views/TitleBlock/TitleBlock";
 import Labyrinth from "./views/Labyrinth/Labyrinth";
 
@@ -11,7 +13,7 @@ function App() {
         <TitleBlock />
       </header>
       <section className="mazeSection">
-        <Labyrinth size={40} />
+        <Labyrinth size={{ size }} />
       </section>
     </main>
   );

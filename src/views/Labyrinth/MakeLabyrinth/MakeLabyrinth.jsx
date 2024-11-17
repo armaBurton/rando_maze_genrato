@@ -1,17 +1,19 @@
-const MakeLabyrinth = (geometry) => {
+import { size, length } from "../../../utils/utils";
+
+const MakeLabyrinth = () => {
   const initPixels = {};
-  for (let x = 0; x < geometry.size; x++) {
-    for (let y = 0; y < geometry.size; y++) {
+  for (let x = 0; x < size; x++) {
+    for (let y = 0; y < size; y++) {
       initPixels[`${x}-${y}`] = {
         x: x,
         y: y,
-        size: geometry.size,
-        length: geometry.length,
+        size: size,
+        length: length,
         top: "true",
         bottom: "true",
         right: "true",
         left: "true",
-        visited: "false",
+        "data-visited": "false",
         key: `${x}-${y}`,
       };
     }

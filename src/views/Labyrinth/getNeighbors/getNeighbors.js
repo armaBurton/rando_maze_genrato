@@ -32,9 +32,7 @@ const getNeighbors = (pixelRef, size, x, y) => {
   ) {
     neighbors.push(pixelRef.current[`${x}-${y + 1}`]);
   }
-  if (neighbors.length > 0) {
-    console.log("neighbors ", neighbors);
-  }
+
   return neighbors;
 };
 

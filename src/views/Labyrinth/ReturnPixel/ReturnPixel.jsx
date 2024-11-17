@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { mazeBkgnd, mazeBorder } from "../../../utils/utils";
 
 const ReturnPixel = forwardRef((props, ref) => {
   const bool = String(props.visited);
@@ -9,11 +10,11 @@ const ReturnPixel = forwardRef((props, ref) => {
       data-visited={bool}
       ref={ref}
       style={{
-        borderTop: "1px solid black",
-        borderBottom: "1px solid black",
-        borderRight: "1px solid black",
-        borderLeft: "1px solid black",
-        backgroundColor: "yellow",
+        borderTop: `1px solid ${mazeBorder}`,
+        borderBottom: `1px solid ${mazeBorder}`,
+        borderRight: `1px solid ${mazeBorder}`,
+        borderLeft: `1px solid ${mazeBorder}`,
+        backgroundColor: `${mazeBkgnd}`,
         width: props.length / props.size,
         height: props.length / props.size,
         fontSize: "9px",

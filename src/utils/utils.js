@@ -14,7 +14,7 @@ export const changeBgColor = (
   const b = randoNumbo(256);
   if (lastGrid) {
     const lastDiv = divRef.current[lastGrid];
-    lastDiv.style.backgroundColor = "yellow";
+    lastDiv.style.backgroundColor = "var( --maze-bkgnd-init)";
   }
   const selectedDiv = divRef.current[`${x}-${y}`];
   if (selectedDiv) {
@@ -36,3 +36,18 @@ export const timeout = (time) => {
 };
 
 export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+const geometry = {
+  size: 60,
+  length: 600,
+};
+
+export const { size, length } = geometry;
+
+const styleDefs = {
+  mazeBorder: "var(--bkgnd-drk)",
+  mazeBkgnd: "var( --maze-bkgnd-init)",
+  pixelPath: "var(--hookers-green)",
+};
+
+export const { mazeBorder, mazeBkgnd, pixelPath } = styleDefs;

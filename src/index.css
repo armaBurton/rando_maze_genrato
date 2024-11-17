@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Carrois+Gothic&family=Funnel+Display:wght@300..800&family=Jaldi:wght@400;700&display=swap");
 
+:root {
+  --bkgnd-drk: #0c0f0a;
+  --maze-bkgnd-init: #1d2518;
+  --rose: #ff206e;
+  --hookers-green: #648381;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,5 +17,5 @@
 body {
   width: 100%;
   min-height: 100vh;
-  background-color: #9c7a68;
+  background-color: var(--bkgnd-drk);
 }

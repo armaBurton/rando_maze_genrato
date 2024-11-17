@@ -8,7 +8,7 @@ main {
 header {
   width: 100%;
   height: 75px;
-  color: indigo;
+  color: var(--rose);
   font-size: 2em;
   display: flex;
   align-items: center;
@@ -23,11 +23,11 @@ header {
   justify-content: center;
 }
 
-.mazeContainer {
+/* .mazeContainer {
   width: 600px;
   height: 600px;
-  background-color: yellow;
-}
+  background-color: var(--maze-bkgnd-init);
+} */
 
 .cellComponent {
   display: flex;
