@@ -18,7 +18,7 @@ const CellGrid = forwardRef((size, ref) => {
   const dim = 600 / size;
   // const cells = [];
   const divRef = useRef({});
-  const [cells, setCells] = useState([]);
+  //   const [cells, setCells] = useState([]);
   const [lastGrid, setLastGrid] = useState(null);
   const [running, setRunning] = useState(false);
   const [xVal, setXVal] = useState(0);
@@ -107,7 +107,7 @@ const CellGrid = forwardRef((size, ref) => {
       //     />
       //   );
       const cellBLock = ReturnCell(i, j, borders[`${i}-${j}`], divRef, dim);
-      setCells([...cells, cellBLock]);
+      //   setCells([...cells, cellBLock]);
       <div
         x={borders[`${i}-${j}`].x}
         y={borders[`${i}-${j}`].y}

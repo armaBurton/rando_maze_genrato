@@ -1,12 +1,9 @@
-// import React from "react";
+const MakePixelDivs = ({ pixels }) => {
+  for (let x = 0; x < pixels.size; x++) {
+    for (let y = 0; y < pixels.size; y++) {
+      console.log(pixels[`${x}x${y}`]);
+    }
+  }
+};
 
-// const MakePixelDivs = ({ pixels, pixelRef, sizeX, sizeY, length }) => {
-//     const pixelArray = []
-//     for (let x = 0; x < sizeX; x++) {
-//         for (let y = 0; y < sizeY; y++) {
-//             console.log(pixels[`${x}x${y}`].x)
-//         }
-//     }
-// }
-
-// export default MakePixelDivs;
+export default MakePixelDivs;

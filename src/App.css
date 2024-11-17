@@ -35,6 +35,18 @@ header {
   justify-content: center;
 }
 
+.pixelComponent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mazeUnit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .mazeButton {
   margin-top: 30px;
   cursor: pointer;
