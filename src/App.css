@@ -15,6 +15,12 @@ header {
   justify-content: center;
 }
 
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .mazeSection {
   padding-top: 20px;
   display: flex;
@@ -23,11 +29,13 @@ header {
   justify-content: center;
 }
 
-/* .mazeContainer {
+.mazeContainer {
+  display: flex;
+  flex-direction: column;
   width: 600px;
   height: 600px;
   background-color: var(--maze-bkgnd-init);
-} */
+}
 
 .cellComponent {
   display: flex;
@@ -53,6 +61,15 @@ header {
   width: 125px;
   height: 35px;
   border-radius: 0.25em;
+  background-color: var(--hookers-green);
+}
+
+.mazeButton:hover {
+  background-color: var(--rose);
+}
+
+.mazeButton:active {
+  background-color: var(--emerald);
 }
 
 .coords {

@@ -38,7 +38,7 @@ export const timeout = (time) => {
 export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const geometry = {
-  size: 60,
+  size: 20,
   length: 600,
 };
 
@@ -48,6 +48,9 @@ const styleDefs = {
   mazeBorder: "var(--bkgnd-drk)",
   mazeBkgnd: "var( --maze-bkgnd-init)",
   pixelPath: "var(--hookers-green)",
+  currentPixel: "var(--rose-red)",
+  validPixel: "var(--rose)",
 };
 
-export const { mazeBorder, mazeBkgnd, pixelPath } = styleDefs;
+export const { mazeBorder, mazeBkgnd, pixelPath, currentPixel, validPixel } =
+  styleDefs;

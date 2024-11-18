@@ -2,12 +2,19 @@ import React, { forwardRef } from "react";
 import { mazeBkgnd, mazeBorder } from "../../../utils/utils";
 
 const ReturnPixel = forwardRef((props, ref) => {
-  const bool = String(props.visited);
+  const visited = String(props.visited);
+  const traversed = String(props.traversed);
+  const validPath = String(props.validPath);
+  const currentPosition = String(props.currentPosition);
+  // console.log("ReturnPixel", props);
   return (
     <div
       x={props.x}
       y={props.y}
-      data-visited={bool}
+      data-visited={visited}
+      data-traversed={traversed}
+      data-validpath={validPath}
+      data-currentposition={currentPosition}
       ref={ref}
       style={{
         borderTop: `1px solid ${mazeBorder}`,
