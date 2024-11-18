@@ -153,19 +153,31 @@ const Labyrinth = forwardRef(() => {
       visited.add(`${x}-${y}`);
 
       const newPath = getValidPath(currentPixel, pixelRef, size, x, y, visited);
+      console.log(newPath.length);
 
       if (newPath.length === 0) {
         console.log(`Dead End at: [${x}-${y}]`);
         currentPixel.setAttribute("data-validpath", "false");
+        const deadEndPixel = { x, y, traversableDirections: 0 };
+        visited.add(JSON.stringify(deadEndPixel));
         await backTrack(stack, visited, pixelRef, size);
       } else {
-        const randomDirection =
-          newPath[Math.floor(Math.random() * newPath.length)];
+        const traversableDirections = newPath.length;
+        const currentPixel = { x, y, traversableDirections };
+        visited.add(JSON.stringify(currentPixel));
+        // const randomDirection =
+        //   newPath[Math.floor(Math.random() * newPath.length)];
         // newPath.forEach((np) => {
         //   console.log(np.getAttribute("data-validpath"));
         //   stack.push(np);
         // });
-        stack.push(randomDirection);
+        const selectedPath = newPath[0];
+
+        const selectedX = parseInt(selectedPath.getAttribute("x"));
+        const selectedY = parseInt(selectedPath.getAttribute("y"));
+        stack.push(selectedPath);
+
+        selectedPath.setAttribute("data-validpath", "true");
       }
     }
   };

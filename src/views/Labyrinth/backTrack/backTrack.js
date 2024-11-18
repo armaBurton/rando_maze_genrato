@@ -6,12 +6,20 @@ const backTrack = async (stack, visited, pixelRef, size) => {
     const x = parseInt(popped.getAttribute("x"));
     const y = parseInt(popped.getAttribute("y"));
 
+    console.log(`Backtracking at (${x}, ${y})`);
+
     popped.setAttribute("data-validpath", "false");
     const newPath = getValidPath(popped, pixelRef, size, x, y, visited);
-    if (newPath.length > 0) {
+    const traversableDirections = newPath.length;
+
+    if (traversableDirections > 0) {
       console.log(`Found new path from (${x}, ${y})`);
       stack.push(...newPath); // Add valid new paths back into the stack
       break;
+    } else {
+      const deadEnd = { x, y, traversableDirections: 0 };
+      visited.add(JSON.stringify(deadEnd));
+      await backTrack(stack, visited, pixelRef, size);
     }
   }
 };
