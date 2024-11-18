@@ -5,6 +5,8 @@
   --maze-bkgnd-init: #1d2518;
   --rose: #ff206e;
   --rose-red: #cc0047;
+  --Claret: #8f0032;
+  --Cyclamen: #ff70a2;
   --emerald: #0cce6b;
   --hookers-green: #648381;
   --tyrian-purple: #4c0827;
@@ -22,4 +24,17 @@ body {
   width: 100%;
   min-height: 100vh;
   background-color: var(--bkgnd-drk);
+}
+
+.animatePosition {
+  animation: currentPosition 1000ms ease-in-out;
+}
+
+@keyframes currentPosition {
+  from {
+    background-color: var(--Claret);
+  }
+  to {
+    background-color: var(--hookers-green);
+  }
 }

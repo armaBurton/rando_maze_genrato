@@ -6,22 +6,21 @@ const ReturnPixel = forwardRef((props, ref) => {
   const traversed = String(props.traversed);
   const validPath = String(props.validPath);
   const currentPosition = String(props.currentPosition);
-  // console.log("ReturnPixel", props);
   return (
     <div
       x={props.x}
       y={props.y}
-      data-visited={visited}
-      data-traversed={traversed}
-      data-validpath={validPath}
-      data-currentposition={currentPosition}
+      data-visited={"false"}
+      data-traversed={"false"}
+      data-validpath={"true"}
+      data-currentposition={"false"}
       ref={ref}
       style={{
         borderTop: `1px solid ${mazeBorder}`,
         borderBottom: `1px solid ${mazeBorder}`,
         borderRight: `1px solid ${mazeBorder}`,
         borderLeft: `1px solid ${mazeBorder}`,
-        backgroundColor: `${mazeBkgnd}`,
+        backgroundColor: mazeBkgnd,
         width: props.length / props.size,
         height: props.length / props.size,
         fontSize: "9px",
@@ -30,6 +29,8 @@ const ReturnPixel = forwardRef((props, ref) => {
     ></div>
   );
 });
+
+const getBackgroundColor = () => {};
 
 export default ReturnPixel;
 

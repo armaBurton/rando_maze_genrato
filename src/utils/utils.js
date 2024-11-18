@@ -54,3 +54,44 @@ const styleDefs = {
 
 export const { mazeBorder, mazeBkgnd, pixelPath, currentPixel, validPixel } =
   styleDefs;
+
+// export const up = (currentPixel) => {
+//   const path = currentPixel.style.borderTop === "none" ? true : false;
+//   return path;
+// };
+// export const down = (currentPixel) => {
+//   return currentPixel.style.borderBottom === "none" ? true : false;
+// };
+// export const left = (currentPixel) => {
+//   return currentPixel.style.borderLeft === "none" ? true : false;
+// };
+// export const right = (currentPixel) => {
+//   return currentPixel.style.borderRight === "none" ? true : false;
+// };
+// export const validUp = (pixelRef, neighbors) => {
+//   console.log(pixelRef.current[neighbors].getAttribute("data-validpath"));
+//   const up =
+//     pixelRef.current[neighbors].getAttribute("data-validpath") === true
+//       ? true
+//       : false;
+//   return up;
+// };
+// export const validDown = (pixelRef, neighbors) => {
+//   const down =
+//     pixelRef.current[neighbors.down].getAttribute("data-validpath") === true
+//       ? true
+//       : false;
+//   return down;
+// };
+// export const validLeft = (pixelRef, neighbors) => {
+//   return pixelRef.current[neighbors.left].getAttribute("data-validpath") ===
+//     true
+//     ? true
+//     : false;
+// };
+// export const validRight = (pixelRef, neighbors) => {
+//   return pixelRef.current[neighbors.right].getAttribute("data-validpath") ===
+//     true
+//     ? true
+//     : false;
+// };

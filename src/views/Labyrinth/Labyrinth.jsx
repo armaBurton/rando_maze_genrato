@@ -7,8 +7,12 @@ import MakeLabyrinth from "./MakeLabyrinth/MakeLabyrinth";
 import ReturnPixel from "./ReturnPixel/ReturnPixel";
 import getNeighbors from "./getNeighbors/getNeighbors";
 import getUpdatedWalls from "./getUpdatedWalls/getUpdatedWalls";
-import setCurrentPositionAttributes from "./setCurrentPositionAttributes/setCurrentPositionAttributes";
-import getUnvisitedNeighbors from "./getUnvisitedNeighbors/getUnvisitedNeighbors";
+import getValidPath from "./getValidPath/getValidPath";
+import updateCurrentPixelState from "./updateCurrentPixelState/updateCurrentPixelState";
+import backTrack from "./backTrack/backTrack";
+
+// import setCurrentPositionAttributes from "./setCurrentPositionAttributes/setCurrentPositionAttributes";
+// import getUnvisitedNeighbors from "./getUnvisitedNeighbors/getUnvisitedNeighbors";
 
 const Labyrinth = forwardRef(() => {
   const pixelRef = useRef({});
@@ -34,7 +38,7 @@ const Labyrinth = forwardRef(() => {
         pixelRef.current[`${x}-${y}`].style.backgroundColor = `${mazeBkgnd}`;
         pixelRef.current[`${x}-${y}`].setAttribute("data-visited", "false");
         pixelRef.current[`${x}-${y}`].setAttribute("data-traversed", "false");
-        pixelRef.current[`${x}-${y}`].setAttribute("data-validPath", "false");
+        pixelRef.current[`${x}-${y}`].setAttribute("data-validPath", "true");
         pixelRef.current[`${x}-${y}`].setAttribute(
           "data-currentPosition",
           "false",
@@ -125,57 +129,45 @@ const Labyrinth = forwardRef(() => {
   };
 
   const traverseLabyrinth = async () => {
-    if (running) return;
+    const stack = [pixelRef.current["0-0"]];
+    const visited = new Set();
+    const startPixel = { x: 0, y: 0, traversableDirections: 1 };
+    visited.add(JSON.stringify(startPixel));
 
-    //don't reset
-    //don't rerender
-    setRunning(true);
-    const stack = [];
-
-    //initiate starting pixel and set tracking attributes
-    const startingPixel = pixelRef.current["0-0"];
-    setCurrentPositionAttributes(startingPixel, "true", "true", "true");
-
-    //push it to the stack
-    stack.push(startingPixel);
-
-    // // //while the stack is not empty
     while (stack.length > 0) {
-      //   //pop a pixel and make it current
-      const current = stack.pop();
-      // console.log(`*** current ==> ` + current);
+      const currentPixel = stack.pop();
 
-      //find neighbors
-      const nbs = getUnvisitedNeighbors(
-        pixelRef,
-        size,
-        parseInt(current.getAttribute("x"), 10),
-        parseInt(current.getAttribute("y"), 10),
-      );
+      const x = parseInt(currentPixel.getAttribute("x"));
+      const y = parseInt(currentPixel.getAttribute("y"));
 
-      // if the current cell has any neighbors.
-      if (nbs && nbs.length > 0) {
-        //     //set current position to false
-        setCurrentPositionAttributes(current, "false", "true", "true");
-        //     //push the current pixel to the stack
-        stack.push(current);
+      console.log(`Visiting: (${x}, ${y})`);
 
-        //     //choose a neighbor
-        //     shuffle(nbs);
-        //     const curNb = sample(nbs);
-        //     // setCurrentPositionAttributes(curNb, "true", "true", "true");
-        await timeout(10);
-        stack.push(nbs);
-        console.log(`*** nbs.length ==> ` + nbs.length);
+      updateCurrentPixelState(currentPixel);
+
+      if (x === size - 1 && y === size - 1) {
+        alert("exit found");
+        break;
+      }
+
+      currentPixel.setAttribute("data-traversed", "true");
+      visited.add(`${x}-${y}`);
+
+      const newPath = getValidPath(currentPixel, pixelRef, size, x, y, visited);
+
+      if (newPath.length === 0) {
+        console.log(`Dead End at: [${x}-${y}]`);
+        currentPixel.setAttribute("data-validpath", "false");
+        await backTrack(stack, visited, pixelRef, size);
       } else {
-        //dead end, start pooping off pixels until there is a unvisited path
-        const backTrack = stack.pop();
-        //set attribtes for invalid path
-        setCurrentPositionAttributes(backTrack, "true", "true", "false");
-        // stack.push(backTrack);
+        const randomDirection =
+          newPath[Math.floor(Math.random() * newPath.length)];
+        // newPath.forEach((np) => {
+        //   console.log(np.getAttribute("data-validpath"));
+        //   stack.push(np);
+        // });
+        stack.push(randomDirection);
       }
     }
-    setRunning(false);
   };
 
   return (

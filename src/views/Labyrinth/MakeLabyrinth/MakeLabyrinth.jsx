@@ -9,11 +9,6 @@ const MakeLabyrinth = () => {
         y: y,
         size: size,
         length: length,
-        top: "true",
-        bottom: "true",
-        right: "true",
-        left: "true",
-        "data-visited": "false",
         key: `${x}-${y}`,
       };
     }
