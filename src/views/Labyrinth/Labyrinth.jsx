@@ -129,7 +129,7 @@ const Labyrinth = forwardRef(() => {
         getUpdatedWalls(current, curNb);
 
         curNb.setAttribute("data-visited", "true");
-        // await timeout(10);
+        await timeout(10);
         stack.push(curNb);
       }
     }
