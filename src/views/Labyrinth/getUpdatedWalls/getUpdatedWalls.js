@@ -1,6 +1,7 @@
 import { pixelPath } from "../../../utils/utils";
 
 const getUpdatedWalls = (fromPixel, toPixel) => {
+  // console.log(toPixel);
   fromPixel.style.backgroundColor = pixelPath;
   toPixel.style.backgroundColor = pixelPath;
   if (
@@ -26,6 +27,9 @@ const getUpdatedWalls = (fromPixel, toPixel) => {
   ) {
     fromPixel.style.borderBottom = "none";
     toPixel.style.borderTop = "none";
+    // toPixel.setAttribute("top", "false");
+    // toPixel.setAttribute("Bottom", "false");
+    // toPixel.style.borderTop = "none";
   }
   if (
     parseInt(fromPixel.getAttribute("x")) -

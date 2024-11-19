@@ -16,11 +16,11 @@ const ReturnPixel = forwardRef((props, ref) => {
       data-currentposition={"false"}
       ref={ref}
       style={{
-        borderTop: `1px solid ${mazeBorder}`,
-        borderBottom: `1px solid ${mazeBorder}`,
-        borderRight: `1px solid ${mazeBorder}`,
-        borderLeft: `1px solid ${mazeBorder}`,
-        backgroundColor: mazeBkgnd,
+        borderTop: props?.top ? "1px solid black" : "none",
+        borderBottom: props?.bottom ? "1px solid black" : "none",
+        borderRight: props?.right ? "1px solid black" : "none",
+        borderLeft: props?.left ? "1px solid black" : "none",
+        backgroundColor: props.backgroundColor,
         width: props.length / props.size,
         height: props.length / props.size,
         fontSize: "9px",

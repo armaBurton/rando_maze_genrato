@@ -1,8 +1,14 @@
 import getValidPath from "../getValidPath/getValidPath";
 
 const backTrack = async (stack, visited, pixelRef, size) => {
+  //   visited.forEach((v) => console.log(v));
+  const setToArray = Array.from(visited);
+  const popped = setToArray.pop();
+  console.log(setToArray[setToArray.length - 1]);
+  visited.clear();
+  visited.add(...setToArray);
+  const len = visited.length;
   while (stack.length > 0) {
-    const popped = stack.pop();
     const x = parseInt(popped.getAttribute("x"));
     const y = parseInt(popped.getAttribute("y"));
 

@@ -8,7 +8,7 @@ const getValidPath = (currentPixel, pixelRef, size, x, y, visited) => {
     !visited.has(`${x - 1}-${y}`) &&
     pixelRef.current[`${x - 1}-${y}`].getAttribute("data-validpath") !== "false"
   ) {
-    console.log("up ");
+    // console.log("up ");
     validPaths.push(pixelRef.current[`${x - 1}-${y}`]);
   }
   if (
@@ -17,7 +17,7 @@ const getValidPath = (currentPixel, pixelRef, size, x, y, visited) => {
     !visited.has(`${x + 1}-${y}`) &&
     pixelRef.current[`${x + 1}-${y}`].getAttribute("data-validpath") !== "false"
   ) {
-    console.log("down ");
+    // console.log("down ");
     validPaths.push(pixelRef.current[`${x + 1}-${y}`]);
   }
   if (
@@ -26,7 +26,7 @@ const getValidPath = (currentPixel, pixelRef, size, x, y, visited) => {
     !visited.has(`${x}-${y - 1}`) &&
     pixelRef.current[`${x}-${y - 1}`].getAttribute("data-validpath") !== "false"
   ) {
-    console.log("left ");
+    // console.log("left ");
     validPaths.push(pixelRef.current[`${x}-${y - 1}`]);
   }
   if (
@@ -35,7 +35,7 @@ const getValidPath = (currentPixel, pixelRef, size, x, y, visited) => {
     !visited.has(`${x}-${y + 1}`) &&
     pixelRef.current[`${x}-${y + 1}`].getAttribute("data-validpath") !== "false"
   ) {
-    console.log("right");
+    // console.log("right");
     validPaths.push(pixelRef.current[`${x}-${y + 1}`]);
   }
   //   console.log(validPaths[0]);

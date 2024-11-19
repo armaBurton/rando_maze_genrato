@@ -56,6 +56,15 @@ const Labyrinth = forwardRef(() => {
           <ReturnPixel
             {...pixels[`${x}-${y}`]}
             key={`${x}-${y}`}
+            top={"true"}
+            bottom={"true"}
+            left={"true"}
+            right={"true"}
+            backgroundColor={mazeBkgnd}
+            visited={"false"}
+            traversed={"false"}
+            validPath={"true"}
+            currentPosition={"false"}
             ref={(e) => {
               if (!pixelRef.current[`${x}-${y}`]) {
                 pixelRef.current[`${x}-${y}`] = e;
@@ -140,7 +149,7 @@ const Labyrinth = forwardRef(() => {
       const x = parseInt(currentPixel.getAttribute("x"));
       const y = parseInt(currentPixel.getAttribute("y"));
 
-      console.log(`Visiting: (${x}, ${y})`);
+      // console.log(`Visiting: (${x}, ${y})`);
 
       updateCurrentPixelState(currentPixel);
 
@@ -153,12 +162,13 @@ const Labyrinth = forwardRef(() => {
       visited.add(`${x}-${y}`);
 
       const newPath = getValidPath(currentPixel, pixelRef, size, x, y, visited);
-      console.log(newPath.length);
+      // console.log(newPath.length);
 
       if (newPath.length === 0) {
         console.log(`Dead End at: [${x}-${y}]`);
         currentPixel.setAttribute("data-validpath", "false");
         const deadEndPixel = { x, y, traversableDirections: 0 };
+        console.log(stack);
         visited.add(JSON.stringify(deadEndPixel));
         await backTrack(stack, visited, pixelRef, size);
       } else {
@@ -173,8 +183,8 @@ const Labyrinth = forwardRef(() => {
         // });
         const selectedPath = newPath[0];
 
-        const selectedX = parseInt(selectedPath.getAttribute("x"));
-        const selectedY = parseInt(selectedPath.getAttribute("y"));
+        // const selectedX = parseInt(selectedPath.getAttribute("x"));
+        // const selectedY = parseInt(selectedPath.getAttribute("y"));
         stack.push(selectedPath);
 
         selectedPath.setAttribute("data-validpath", "true");
