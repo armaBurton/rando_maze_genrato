@@ -9,6 +9,7 @@ import getNeighbors from "./getNeighbors/getNeighbors";
 import getUpdatedWalls from "./getUpdatedWalls/getUpdatedWalls";
 import getValidPath from "./getValidPath/getValidPath";
 import updateCurrentPixelState from "./updateCurrentPixelState/updateCurrentPixelState";
+import visitedButStillValid from "./visitedButStillValid/visitedButStillValid";
 import backTrack from "./backTrack/backTrack";
 
 // import setCurrentPositionAttributes from "./setCurrentPositionAttributes/setCurrentPositionAttributes";
@@ -56,11 +57,6 @@ const Labyrinth = forwardRef(() => {
           <ReturnPixel
             {...pixels[`${x}-${y}`]}
             key={`${x}-${y}`}
-            top={"true"}
-            bottom={"true"}
-            left={"true"}
-            right={"true"}
-            backgroundColor={mazeBkgnd}
             visited={"false"}
             traversed={"false"}
             validPath={"true"}
@@ -107,7 +103,7 @@ const Labyrinth = forwardRef(() => {
       //a. pop a cell from the stack and make it a current cell
       const current = stack.pop();
 
-      //find neightbors
+      //find neighbors
       const nbs = getNeighbors(
         pixelRef,
         size,
@@ -129,7 +125,7 @@ const Labyrinth = forwardRef(() => {
         getUpdatedWalls(current, curNb);
 
         curNb.setAttribute("data-visited", "true");
-        await timeout(10);
+        // await timeout(10);
         stack.push(curNb);
       }
     }
@@ -138,14 +134,55 @@ const Labyrinth = forwardRef(() => {
   };
 
   const traverseLabyrinth = async () => {
+    const visitedStack = [pixelRef.current["0-0"]]
+    const controlStack = [pixelRef.current["0-0"]]
+
+    while (visitedStack.length > 0) {
+      // const currentPixel = pixelRef.current["0-0"];
+      const currentPixel = visitedStack.pop();
+      const x = parseInt(currentPixel.getAttribute("x"));
+      const y = parseInt(currentPixel.getAttribute("y"));
+
+      updateCurrentPixelState(currentPixel);
+      //update current pixel div
+      //shows position on the labyrinth
+      if (parseInt(currentPixel.getAttribute("data-exits")) > 0) {
+        const exits = parseInt(currentPixel.getAttribute("data-exits")) - 1
+        currentPixel.setAttribute("data-exits", exits)
+      }
+      visitedStack.push(currentPixel);
+
+      //get valid exits
+      const validPaths = getValidPath(currentPixel, pixelRef, size, x, y, controlStack)
+      if (validPaths.length > 0) {
+        validPaths.map((vp) => {
+          visitedStack.push(vp);
+          controlStack.push(vp);
+        })
+      }
+      // console.log(validPaths.length)
+      // visitedStack.map(vs => console.log(vs))
+      // console.log("vs.len", visitedStack)
+      // console.log("cs.len", controlStack.length)
+      visitedButStillValid(currentPixel)
+      // console.log(nextPixel)
+      // await setTimeout(10)
+    }
+
+
+  }
+
+  const traversXXeLabyrinth = async () => {
     const stack = [pixelRef.current["0-0"]];
+    const controlStack = [pixelRef.current["0-0"]]
     const visited = new Set();
     const startPixel = { x: 0, y: 0, traversableDirections: 1 };
     visited.add(JSON.stringify(startPixel));
 
+    console.log("start stack: ", stack[0])
     while (stack.length > 0) {
+      //pop off from the stack !!!!!!!!!!!!!!!!!!!1
       const currentPixel = stack.pop();
-
       const x = parseInt(currentPixel.getAttribute("x"));
       const y = parseInt(currentPixel.getAttribute("y"));
 
@@ -157,12 +194,12 @@ const Labyrinth = forwardRef(() => {
         alert("exit found");
         break;
       }
-
-      currentPixel.setAttribute("data-traversed", "true");
+      stack.push(currentPixel)
       visited.add(`${x}-${y}`);
 
       const newPath = getValidPath(currentPixel, pixelRef, size, x, y, visited);
-      // console.log(newPath.length);
+      console.log("valid Path length ", newPath.length);
+      // console.log(currentPixel)
 
       if (newPath.length === 0) {
         console.log(`Dead End at: [${x}-${y}]`);
@@ -170,6 +207,7 @@ const Labyrinth = forwardRef(() => {
         const deadEndPixel = { x, y, traversableDirections: 0 };
         console.log(stack);
         visited.add(JSON.stringify(deadEndPixel));
+        console.log("stack before backtrack ", stack.length)
         await backTrack(stack, visited, pixelRef, size);
       } else {
         const traversableDirections = newPath.length;

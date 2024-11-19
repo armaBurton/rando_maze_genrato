@@ -38,7 +38,7 @@ export const timeout = (time) => {
 export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const geometry = {
-  size: 20,
+  size: 5,
   length: 600,
 };
 
