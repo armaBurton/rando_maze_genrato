@@ -125,7 +125,7 @@ const Labyrinth = forwardRef(() => {
         getUpdatedWalls(current, curNb);
 
         curNb.setAttribute("data-visited", "true");
-        // await timeout(10);
+        await timeout(10);
         stack.push(curNb);
       }
     }
@@ -135,13 +135,22 @@ const Labyrinth = forwardRef(() => {
 
   const traverseLabyrinth = async () => {
     const visitedStack = [pixelRef.current["0-0"]]
-    const controlStack = [pixelRef.current["0-0"]]
+    const visitedSet = new Set();
 
     while (visitedStack.length > 0) {
-      // const currentPixel = pixelRef.current["0-0"];
       const currentPixel = visitedStack.pop();
       const x = parseInt(currentPixel.getAttribute("x"));
       const y = parseInt(currentPixel.getAttribute("y"));
+      const currentKey = `${x}-${y}`
+
+      console.log(currentKey);
+      console.log(currentPixel)
+
+
+
+      if (visitedSet.has(currentKey)) continue;
+
+      visitedSet.add(currentKey)
 
       updateCurrentPixelState(currentPixel);
       //update current pixel div
@@ -150,29 +159,26 @@ const Labyrinth = forwardRef(() => {
         const exits = parseInt(currentPixel.getAttribute("data-exits")) - 1
         currentPixel.setAttribute("data-exits", exits)
       }
-      visitedStack.push(currentPixel);
+      // visitedStack.push(currentPixel);
 
       //get valid exits
-      const validPaths = getValidPath(currentPixel, pixelRef, size, x, y, controlStack)
-      if (validPaths.length > 0) {
-        validPaths.map((vp) => {
-          visitedStack.push(vp);
-          controlStack.push(vp);
-        })
-      }
-      // console.log(validPaths.length)
-      // visitedStack.map(vs => console.log(vs))
-      // console.log("vs.len", visitedStack)
-      // console.log("cs.len", controlStack.length)
+      const validPaths = getValidPath(currentPixel, pixelRef, size, x, y, visitedSet)
+      validPaths.forEach((vp) => visitedStack.push(vp))
+
+      // if (validPaths.length > 0) {
+      //   validPaths.map((vp) => {
+      //     visitedStack.push(vp);
+      //     controlStack.push(vp);
+      //   })
+      // }
+      console.log(visitedStack.length)
       visitedButStillValid(currentPixel)
-      // console.log(nextPixel)
-      // await setTimeout(10)
     }
 
 
   }
 
-  const traversXXeLabyrinth = async () => {
+  const traverseLabyrinthx = async () => {
     const stack = [pixelRef.current["0-0"]];
     const controlStack = [pixelRef.current["0-0"]]
     const visited = new Set();
