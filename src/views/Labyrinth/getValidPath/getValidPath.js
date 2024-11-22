@@ -13,10 +13,13 @@ const getValidPath = (pixelRef, visited, path, size, x, y) => {
     const oldPixel = pixelRef.current[oldKey];
     const pixel = pixelRef.current[key];
     if (newX >= 0 && newX < size && newY >= 0 && newY < size) {
-      const oldPix = oldPixel.style[border];
-      const newPix = pixel.style[border];
-      console.log(`*** oldPix ==> ` + oldPix, x, y);
-      console.log(`*** newPix ==> ` + newPix, newX, newY);
+      if (oldPixel.style[border] === "none") {
+        //   const oldPix = oldPixel.style[border];
+        const newPix = pixel.style[border];
+        //   console.log(`*** oldPix ==> ` + oldPix, x, y);
+        console.log(`*** newPix ==> ` + newPix, border, newX, newY);
+        console.log("*** -21 -getValidPath.js *** pixel ==> ", pixel);
+      }
     }
   });
 };
