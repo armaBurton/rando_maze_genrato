@@ -1,75 +1,65 @@
-
-
-const visited = (id, visitedSet) => {
-  return visitedSet.has(id)
-}
-
-const getValidPath = (currentPixel, pixelRef, size, x, y, visitedSet) => {
-  const validPaths = []
-  let exits = 0;
-
+const getValidPath = (pixelRef, visited, path, size, x, y) => {
   const directions = [
     { dx: -1, dy: 0, border: "borderTop" }, // Up
     { dx: 1, dy: 0, border: "borderBottom" }, // Down
     { dx: 0, dy: -1, border: "borderLeft" }, // Left
     { dx: 0, dy: 1, border: "borderRight" }, // Right
   ];
-
   directions.forEach(({ dx, dy, border }) => {
     const newX = x + dx;
-    const newY = y = dy;
-
-    const id = `${newX}-${newY}`
-
-    console.log(currentPixel.style[border])
-    if (
-      newX >= 0 &&
-      newX < size &&
-      newY >= 0 &&
-      newY < size && // Ensure within bounds
-      currentPixel.style[border] === "none" && // Ensure no wall
-      !visited(id, visitedSet) && // Ensure not visited
-      pixelRef.current[id]?.getAttribute("data-validpath") !== "false" // Ensure valid path
-    ) {
-      validPaths.push(pixelRef.current[id]); // Add to valid paths
-      exits++; // Increment exits
+    const newY = y + dy;
+    const oldKey = `${x}-${y}`;
+    const key = `${newX}-${newY}`;
+    const oldPixel = pixelRef.current[oldKey];
+    const pixel = pixelRef.current[key];
+    if (newX >= 0 && newX < size && newY >= 0 && newY < size) {
+      const oldPix = oldPixel.style[border];
+      const newPix = pixel.style[border];
+      console.log(`*** oldPix ==> ` + oldPix, x, y);
+      console.log(`*** newPix ==> ` + newPix, newX, newY);
     }
   });
-
-  currentPixel.setAttribute("data-exits", exits); // Update exits count
-  return validPaths;
 };
 
-export default getValidPath;
+// const visited = (id, visitedSet) => {
+//   return visitedSet.has(id)
+// }
 
+// const getValidPath = (currentPixel, pixelRef, size, x, y, visitedSet) => {
+//   const validPaths = []
+//   let exits = 0;
 
+//   const directions = [
+//     { dx: -1, dy: 0, border: "borderTop" }, // Up
+//     { dx: 1, dy: 0, border: "borderBottom" }, // Down
+//     { dx: 0, dy: -1, border: "borderLeft" }, // Left
+//     { dx: 0, dy: 1, border: "borderRight" }, // Right
+//   ];
 
+//   directions.forEach(({ dx, dy, border }) => {
+//     const newX = x + dx;
+//     const newY = y = dy;
 
+//     const id = `${newX}-${newY}`
 
+//     console.log(currentPixel.style[border])
+//     if (
+//       newX >= 0 &&
+//       newX < size &&
+//       newY >= 0 &&
+//       newY < size && // Ensure within bounds
+//       currentPixel.style[border] === "none" && // Ensure no wall
+//       !visited(id, visitedSet) && // Ensure not visited
+//       pixelRef.current[id]?.getAttribute("data-validpath") !== "false" // Ensure valid path
+//     ) {
+//       validPaths.push(pixelRef.current[id]); // Add to valid paths
+//       exits++; // Increment exits
+//     }
+//   });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//   currentPixel.setAttribute("data-exits", exits); // Update exits count
+//   return validPaths;
+// };
 
 // const visited = (id, visitedStack) => {
 //   visitedStack.map((pix) => {
@@ -133,3 +123,5 @@ export default getValidPath;
 // };
 
 // export default getValidPath;
+
+export default getValidPath;
