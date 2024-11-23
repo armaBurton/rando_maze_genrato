@@ -1,8 +1,9 @@
 const visitedButStillValid = (pixel) => {
-    pixel.setAttribute("data-traversed", "true");
-    pixel.setAttribute("data-currentposition", "true");
-    pixel.setAttribute("data-validpath", "true");
-    pixel.style.backgroundColor = "var(--Cyclamen)";
-}
+  console.log("*** -2 -visitedButStillValid.js *** pixel ==> ", pixel);
+  pixel.setAttribute("data-traversed", "true");
+  pixel.setAttribute("data-currentposition", "false");
+  pixel.setAttribute("data-validpath", "true");
+  pixel.style.backgroundColor = "var(--Cyclamen)";
+};
 
-export default visitedButStillValid
+export default visitedButStillValid;

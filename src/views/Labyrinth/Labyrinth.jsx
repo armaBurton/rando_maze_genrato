@@ -11,6 +11,7 @@ import getValidPath from "./getValidPath/getValidPath";
 import updateCurrentPixelState from "./updateCurrentPixelState/updateCurrentPixelState";
 import visitedButStillValid from "./visitedButStillValid/visitedButStillValid";
 import backTrack from "./backTrack/backTrack";
+import badPath from "./badPath/badPath";
 
 // import setCurrentPositionAttributes from "./setCurrentPositionAttributes/setCurrentPositionAttributes";
 // import getUnvisitedNeighbors from "./getUnvisitedNeighbors/getUnvisitedNeighbors";
@@ -141,82 +142,28 @@ const Labyrinth = forwardRef(() => {
 
   const traverseLabyrinth = async () => {
     const visited = Array.from({ length: size }, () => Array(size).fill(false));
-    const path = [];
-    let x = 0;
-    let y = 0;
+    visited[0][0] = true;
+    const path = [pixelRef.current["0-0"]];
+    const pixelObj = {
+      x: 0,
+      y: 0,
+      currentPixel: pixelRef.current["0-0"],
+      size,
+    };
+    // console.log(`*** currentPixel ==> ` + currentPixel);
+    await updateCurrentPixelState(pixelObj.currentPixel);
 
-    getValidPath(pixelRef, visited, path, size, x, y);
+    // while (x !== size - 1 && y !== size - 1) {
+    for (let i = 0; i < size; i++) {
+      getValidPath(pixelRef, pixelObj, path, visited);
+      console.log(`*** pixelObj.x, pixelObj.y ==> ` + pixelObj.x, pixelObj.y);
+    }
 
-    // directions.forEach(({ dx, dy, border }) => {
-    //   const newX = x + dx;
-    //   const newY = y + dy;
-    //   const oldKey = `${x}-${y}`;
-    //   const key = `${newX}-${newY}`;
-    //   const oldPixel = pixelRef.current[oldKey];
-    //   const pixel = pixelRef.current[key];
-    //   if (newX >= 0 && newX < size && newY >= 0 && newY < size) {
-    //     const oldBottom = oldPixel.style.borderBottom;
-    //     const bottom = pixel.style.borderBottom;
-    //     console.log("*** -25 -getValidPath.js *** oldBottom ==> ", oldBottom);
-    //     console.log("*** -25 -getValidPath.js *** bottom ==> ", bottom);
-    //   }
-
-    // }
-    //   if (pixel && pixel.styles[border] === "none") {
-    //     console.log(
-    //       '*** -24 -getValidPath.js *** pixelRef.current["0-0"].style ==> ',
-    //       pixelRef.current[key]?.style?.[border],
-    //       border,
-    //     );
-    // path.push(pixelRef.current[key]);
-    //   }
-    // } else {
-    //   console.error("out of bounds");
-    // console.log(path);
-    // const visitedStack = [pixelRef.current["0-0"]];
-    // const visitedSet = new Set();
-
-    // while (visitedStack.length > 0) {
-    //   const currentPixel = visitedStack.pop();
-    //   const x = parseInt(currentPixel.getAttribute("x"));
-    //   const y = parseInt(currentPixel.getAttribute("y"));
-    //   const currentKey = `${x}-${y}`;
-
-    //   console.log(currentKey);
-    //   console.log(currentPixel);
-
-    //   if (visitedSet.has(currentKey)) continue;
-
-    //   visitedSet.add(currentKey);
-
-    //   updateCurrentPixelState(currentPixel);
-    //   //update current pixel div
-    //   //shows position on the labyrinth
-    //   if (parseInt(currentPixel.getAttribute("data-exits")) > 0) {
-    //     const exits = parseInt(currentPixel.getAttribute("data-exits")) - 1;
-    //     currentPixel.setAttribute("data-exits", exits);
-    //   }
-    //   // visitedStack.push(currentPixel);
-
-    //   //get valid exits
-    //   const validPaths = getValidPath(
-    //     currentPixel,
-    //     pixelRef,
-    //     size,
-    //     x,
-    //     y,
-    //     visitedSet,
-    //   );
-    //   validPaths.forEach((vp) => visitedStack.push(vp));
-
-    //   // if (validPaths.length > 0) {
-    //   //   validPaths.map((vp) => {
-    //   //     visitedStack.push(vp);
-    //   //     controlStack.push(vp);
-    //   //   })
-    //   // }
-    //   console.log(visitedStack.length);
-    //   visitedButStillValid(currentPixel);
+    // currentPixel = path[path.length - 1];
+    // getValidPath(pixelRef, currentPixel, visited, path, size, x, y);
+    // currentPixel = path[path.length - 1];
+    // getValidPath(pixelRef, currentPixel, visited, path, size, x, y);
+    // currentPixel = path[path.length - 1];
     // }
   };
 
