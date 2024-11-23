@@ -10,7 +10,6 @@ const getUnvisitedNeighbors = (pixelRef, size, x, y) => {
   ) {
     console.log("*** -10 -getUnvisitedNeighbors.js *** current ==> ", current);
     neighbors.push(pixelRef.current[`${x - 1}-${y}`]);
-    // console.log("up ", pixelRef.current[`${x - 1}-${y}`]);
   }
   //down
   if (
@@ -20,7 +19,6 @@ const getUnvisitedNeighbors = (pixelRef, size, x, y) => {
   ) {
     console.log("*** -14 -getUnvisitedNeighbors.js *** current ==> ", current);
     neighbors.push(pixelRef.current[`${x + 1}-${y}`]);
-    // console.log("down ", pixelRef.current[`${x + 1}-${y}`]);
   }
   //left
   if (
@@ -30,7 +28,6 @@ const getUnvisitedNeighbors = (pixelRef, size, x, y) => {
   ) {
     console.log("*** -18 -getUnvisitedNeighbors.js *** current ==> ", current);
     neighbors.push(pixelRef.current[`${x}-${y - 1}`]);
-    // console.log("left ", pixelRef.current[`${x}-${y - 1}`]);
   }
   //right
   if (
@@ -40,13 +37,7 @@ const getUnvisitedNeighbors = (pixelRef, size, x, y) => {
   ) {
     console.log("*** -22 -getUnvisitedNeighbors.js *** current ==> ", current);
     neighbors.push(pixelRef.current[`${x}-${y + 1}`]);
-    // console.log("right ", pixelRef.current[`${x}-${y + 1}`]);
   }
-
-  //   console.log(
-  //     "*** -71 -getUnvisitedNeighbors.js *** neighbors ==> ",
-  //     neighbors,
-  //   );
 
   return neighbors;
 };

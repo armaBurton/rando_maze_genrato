@@ -9,12 +9,6 @@ import getNeighbors from "./getNeighbors/getNeighbors";
 import getUpdatedWalls from "./getUpdatedWalls/getUpdatedWalls";
 import getValidPath from "./getValidPath/getValidPath";
 import updateCurrentPixelState from "./updateCurrentPixelState/updateCurrentPixelState";
-import visitedButStillValid from "./visitedButStillValid/visitedButStillValid";
-import backTrack from "./backTrack/backTrack";
-import badPath from "./badPath/badPath";
-
-// import setCurrentPositionAttributes from "./setCurrentPositionAttributes/setCurrentPositionAttributes";
-// import getUnvisitedNeighbors from "./getUnvisitedNeighbors/getUnvisitedNeighbors";
 
 const Labyrinth = forwardRef(() => {
   const pixelRef = useRef({});
@@ -28,7 +22,6 @@ const Labyrinth = forwardRef(() => {
     setMazeCompleted(false);
     for (let x = 0; x < size; x++) {
       for (let y = 0; y < size; y++) {
-        // console.log("resetLabyrinth: ", pixelRef.current[`${x}-${y}`].style);
         pixelRef.current[`${x}-${y}`].style.borderTop =
           `1px solid ${mazeBorder}`;
         pixelRef.current[`${x}-${y}`].style.borderBottom =
@@ -91,12 +84,10 @@ const Labyrinth = forwardRef(() => {
     //redraw labyrinth
     renderLabyrinth();
 
-    // console.log("generating maze");
     setRunning(true);
     const stack = [];
 
     //1 initial pixel
-    // console.log("generateMaze");
     const currentPixel = pixelRef.current["0-0"];
 
     //2 mark current cell as visited
@@ -141,6 +132,8 @@ const Labyrinth = forwardRef(() => {
   };
 
   const traverseLabyrinth = async () => {
+    if (running) return;
+    setRunning(true);
     const visited = Array.from({ length: size }, () => Array(size).fill(false));
     visited[0][0] = true;
     const path = [pixelRef.current["0-0"]];
@@ -150,80 +143,14 @@ const Labyrinth = forwardRef(() => {
       currentPixel: pixelRef.current["0-0"],
       size,
     };
-    // console.log(`*** currentPixel ==> ` + currentPixel);
     await updateCurrentPixelState(pixelObj.currentPixel);
 
-    // while (x !== size - 1 && y !== size - 1) {
     for (let i = 0; i < size; i++) {
       getValidPath(pixelRef, pixelObj, path, visited);
       console.log(`*** pixelObj.x, pixelObj.y ==> ` + pixelObj.x, pixelObj.y);
     }
-
-    // currentPixel = path[path.length - 1];
-    // getValidPath(pixelRef, currentPixel, visited, path, size, x, y);
-    // currentPixel = path[path.length - 1];
-    // getValidPath(pixelRef, currentPixel, visited, path, size, x, y);
-    // currentPixel = path[path.length - 1];
-    // }
+    setRunning(false);
   };
-
-  // const traverseLabyrinthx = async () => {
-  //   const stack = [pixelRef.current["0-0"]];
-  //   const controlStack = [pixelRef.current["0-0"]]
-  //   const visited = new Set();
-  //   const startPixel = { x: 0, y: 0, traversableDirections: 1 };
-  //   visited.add(JSON.stringify(startPixel));
-
-  //   console.log("start stack: ", stack[0])
-  //   while (stack.length > 0) {
-  //     //pop off from the stack !!!!!!!!!!!!!!!!!!!1
-  //     const currentPixel = stack.pop();
-  //     const x = parseInt(currentPixel.getAttribute("x"));
-  //     const y = parseInt(currentPixel.getAttribute("y"));
-
-  //     // console.log(`Visiting: (${x}, ${y})`);
-
-  //     updateCurrentPixelState(currentPixel);
-
-  //     if (x === size - 1 && y === size - 1) {
-  //       alert("exit found");
-  //       break;
-  //     }
-  //     stack.push(currentPixel)
-  //     visited.add(`${x}-${y}`);
-
-  //     const newPath = getValidPath(currentPixel, pixelRef, size, x, y, visited);
-  //     console.log("valid Path length ", newPath.length);
-  //     // console.log(currentPixel)
-
-  //     if (newPath.length === 0) {
-  //       console.log(`Dead End at: [${x}-${y}]`);
-  //       currentPixel.setAttribute("data-validpath", "false");
-  //       const deadEndPixel = { x, y, traversableDirections: 0 };
-  //       console.log(stack);
-  //       visited.add(JSON.stringify(deadEndPixel));
-  //       console.log("stack before backtrack ", stack.length)
-  //       await backTrack(stack, visited, pixelRef, size);
-  //     } else {
-  //       const traversableDirections = newPath.length;
-  //       const currentPixel = { x, y, traversableDirections };
-  //       visited.add(JSON.stringify(currentPixel));
-  //       // const randomDirection =
-  //       //   newPath[Math.floor(Math.random() * newPath.length)];
-  //       // newPath.forEach((np) => {
-  //       //   console.log(np.getAttribute("data-validpath"));
-  //       //   stack.push(np);
-  //       // });
-  //       const selectedPath = newPath[0];
-
-  //       // const selectedX = parseInt(selectedPath.getAttribute("x"));
-  //       // const selectedY = parseInt(selectedPath.getAttribute("y"));
-  //       stack.push(selectedPath);
-
-  //       selectedPath.setAttribute("data-validpath", "true");
-  //     }
-  //   }
-  // };
 
   return (
     <>
@@ -248,9 +175,6 @@ const Labyrinth = forwardRef(() => {
       ) : (
         ""
       )}
-      {/* <p className="coords">
-        {xVal >= 0 ? `${xVal}` : ``}-{yVal >= 0 ? `${yVal}` : ``}
-      </p> */}
     </>
   );
 });

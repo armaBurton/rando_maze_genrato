@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-// import { mazeBkgnd, mazeBorder } from "../../../utils/utils";
 
 const ReturnPixel = forwardRef((props, ref) => {
   return (
