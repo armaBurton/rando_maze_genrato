@@ -8,7 +8,7 @@ main {
 header {
   width: 100%;
   height: 75px;
-  color: var(--rose);
+  color: var(--Claret);
   font-size: 2em;
   display: flex;
   align-items: center;
