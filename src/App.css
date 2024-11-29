@@ -8,7 +8,7 @@ main {
 header {
   width: 100%;
   height: 75px;
-  color: var(--Claret);
+  color: var(--hookers-green);
   font-size: 2em;
   display: flex;
   align-items: center;
@@ -65,7 +65,7 @@ button {
 }
 
 .mazeButton:hover {
-  background-color: var(--rose);
+  background-color: var(--rose-red);
 }
 
 .mazeButton:active {
