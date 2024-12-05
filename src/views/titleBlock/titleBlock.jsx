@@ -1,9 +1,9 @@
 const TitleBlock = () => {
-    return (
-        <>
-            <h1>Rando Maze Generato!</h1>
-        </>
-    )
-}
+  return (
+    <>
+      <h1>Rando Maze Generator!</h1>
+    </>
+  );
+};
 
 export default TitleBlock;
