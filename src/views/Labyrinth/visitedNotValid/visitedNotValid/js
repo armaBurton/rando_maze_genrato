@@ -1,0 +1,10 @@
+
+
+const visitedNotValid = (pixel) => {
+    pixel.setAttribute("data-traversed", "true");
+    pixel.setAttribute("data-currentposition", "true");
+    pixel.setAttribute("data-validpath", "false");
+    pixel.style.backgroundColor = "var(--hookers-green)";
+}
+
+export default visitedNotValid

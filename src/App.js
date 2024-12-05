@@ -3,8 +3,9 @@ import React from "react";
 import "./index.css";
 import "./App.css";
 import { size } from "./utils/utils";
-import TitleBlock from "./views/TitleBlock/TitleBlock";
+// import TitleBlock from "./views/TitleBlock/TitleBlock";
 import Labyrinth from "./views/Labyrinth/Labyrinth";
+import TitleBlock from "./views/TitleBlock/TitleBlock";
 
 function App() {
   return (
